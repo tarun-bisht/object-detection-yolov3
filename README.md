@@ -1,6 +1,6 @@
 # Object Detection using YOLOv3 Tensorflow 2
 
->> A starter yolov3 object detection template using tensorflow 2
+> A starter yolov3 object detection template using tensorflow 2
 
 ### (YOLO v3 Implementation from)[https://github.com/zzh8829/yolov3-tf2]
 
