@@ -1,4 +1,15 @@
-### (YOLO V3 Implementation from)[https://github.com/zzh8829/yolov3-tf2]
+# Object Detection using YOLOv3 Tensorflow 2
+
+>> A starter yolov3 object detection template using tensorflow 2
+
+### (YOLO v3 Implementation from)[https://github.com/zzh8829/yolov3-tf2]
+
+### Features:
+- Realtime object detection using YOLOv3 and Tensorflow
+- Not more to setup
+- Save model to tensorflow serving and tflite
+- Create datasets by downloading images from google image search or extracting frames from video
+- Converting images and labels to tfrecords file
 
 commands:
 - Training a model

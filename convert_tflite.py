@@ -16,7 +16,7 @@ from tensorflow.python.util import nest
 flags.DEFINE_string('weights', 'models/checkpoints/yolov3/yolov3.tf',
                     'path to weights file')
 flags.DEFINE_boolean('tiny', False, 'yolov3 or yolov3-tiny')
-flags.DEFINE_string('output', 'data/outputs/tflite/yolov3/yolov3.tflite',
+flags.DEFINE_string('output', 'data/outputs/tflite/yolov3.tflite',
                     'path to saved_model')
 flags.DEFINE_string('classes', 'data/coco.names', 'path to classes file')
 # flags.DEFINE_string('image', './data/girl.png', 'path to input image')
@@ -34,6 +34,9 @@ def main(_argv):
     logging.info('weights loaded')
 
     converter = tf.lite.TFLiteConverter.from_keras_model(yolo)
+    converter.target_ops=[tf.lite.OpsSet.TFLITE_BUILTINS,
+                            tf.lite.OpsSet.SELECT_TF_OPS]
+    converter.allow_custom_ops=True
     tflite_model = converter.convert()
     open(FLAGS.output, 'wb').write(tflite_model)
     logging.info("model saved to: {}".format(FLAGS.output))

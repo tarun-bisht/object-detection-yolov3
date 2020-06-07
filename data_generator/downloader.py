@@ -29,36 +29,19 @@ def complete_loading(driver):
     except:
         pass
 
-"""https://stackoverflow.com/questions/20986631/how-can-i-scroll-a-web-page-using-selenium-webdriver-in-python"""
-def scroll_bottom(driver):
-    SCROLL_PAUSE_TIME = 0.1
-    # Get scroll height
-    last_height = driver.execute_script("return document.body.scrollHeight")
-    while True:
-        # Scroll down to bottom
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # Wait to load page
-        time.sleep(SCROLL_PAUSE_TIME)
-        # Calculate new scroll height and compare with last scroll height
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
-
-def download_images(keywords,chromedriver,img_size=(1280,720),limit=50):
+def download_images(keywords,chromedriver,output_path,img_size=(1280,720),limit=50):
     driver = webdriver.Chrome(chromedriver)
     if not os.path.isdir(os.path.join("data","downloads")):
         os.mkdir(os.path.join("data","downloads"))
     for key in keywords:
-        if not os.path.isdir(os.path.join("data","downloads",key)):
-            os.mkdir(os.path.join("data","downloads",key))
-        saved_base_path=os.path.join("data","downloads",key)
+        if not os.path.isdir(os.path.join(output_path,"downloads",key)):
+            os.mkdir(os.path.join(output_path,"downloads",key))
+        saved_base_path=os.path.join(output_path,"downloads",key)
         t0=time.time()
         error=0
         google_url_params={"q":key,"tbm":"isch"}
         url=google_base_url+urllib.parse.urlencode(google_url_params)
         driver.get(url)
-        scroll_bottom(driver)
         WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.XPATH,'//*[@id="islmp"]/div/div/div/div/div[4]')))
         time.sleep(1)
         try:

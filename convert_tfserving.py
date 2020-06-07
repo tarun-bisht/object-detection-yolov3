@@ -16,7 +16,7 @@ from tensorflow.python.util import nest
 flags.DEFINE_string('weights', 'models/checkpoints/yolov3/yolov3.tf',
                     'path to weights file')
 flags.DEFINE_boolean('tiny', False, 'yolov3 or yolov3-tiny')
-flags.DEFINE_string('output', 'data/outputs/serving/1', 'path to saved_model')
+flags.DEFINE_string('output', 'data/outputs/serving', 'path to saved_model')
 flags.DEFINE_string('classes', 'data/labels/coco.names', 'path to classes file')
 # flags.DEFINE_string('image', './data/girl.png', 'path to input image')
 flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')

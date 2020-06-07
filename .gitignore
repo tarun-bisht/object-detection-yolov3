@@ -8,6 +8,7 @@
 *.ckpt
 /models/checkpoints/*
 /data/outputs/serving/*
+/data/outputs/tflite/*
 /data/outputs/*.jpg
 /data/donwloads/*
 /data/images/train/*
