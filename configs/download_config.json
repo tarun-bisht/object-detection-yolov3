@@ -1,0 +1,8 @@
+{
+    "chromedriver":"F:\\Softwares\\chromedriver.exe",
+    "keywords":[
+        "Monkey"
+    ],
+    "limit":200,
+    "size":[1280,720]
+}
