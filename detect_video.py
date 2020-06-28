@@ -43,7 +43,6 @@ def main(_argv):
     out = None
 
     if FLAGS.output:
-        # by default VideoCapture returns float instead of int
         width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = int(vid.get(cv2.CAP_PROP_FPS))
@@ -52,7 +51,6 @@ def main(_argv):
 
     while True:
         _, img = vid.read()
-
         if img is None:
             logging.warning("Empty Frame")
             time.sleep(0.1)
@@ -76,7 +74,7 @@ def main(_argv):
         cv2.imshow('output', img)
         if cv2.waitKey(1) == ord('q'):
             break
-
+    vid.release()
     cv2.destroyAllWindows()
 
 

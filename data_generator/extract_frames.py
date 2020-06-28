@@ -23,8 +23,7 @@ def get_frames(input_paths,size,output_path):
 				break
 
 			if count>=num_frames:
-				img_ = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-				img_=cv2.resize(img_,tuple(size))
+				img_=cv2.resize(img,tuple(size))
 				path=os.path.join(output_path,"frames",f'{num:0003}.jpg')
 				cv2.imwrite(path,img_)
 				print("Image Saved to: ",path)

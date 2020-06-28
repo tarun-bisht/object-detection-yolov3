@@ -10,9 +10,12 @@
 /data/outputs/serving/*
 /data/outputs/tflite/*
 /data/outputs/*.jpg
-/data/donwloads/*
+/data/outputs/*.avi
+/data/outputs/*.mp4
+/data/downloads/*
 /data/images/train/*
 /data/images/test/*
+/data/frames/*
 /logs/
 /Untitled.ipynb
 /output.jpg

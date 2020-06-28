@@ -21,7 +21,7 @@ def main(_argv):
 	except Exception as e:
 			print("ERROR:: ",e)
 	if FLAGS.download:
-		download_images(arguments["keywords"],arguments["chromedriver"],FLAGS.output,arguments["size"],arguments["limit"])
+		download_images(arguments["keywords"],arguments["chromedriver"],FLAGS.output,arguments["size"],arguments["limit"],search_engine="duckduckgo")
 		
 	else:
 		get_frames(arguments["video_paths"],arguments["size"],FLAGS.output)
