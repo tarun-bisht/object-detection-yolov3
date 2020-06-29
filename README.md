@@ -22,3 +22,6 @@ python webcam_detect.py --weights=models/checkpoints/theft/yolov3_train_5.tf --n
 
 - detect on images
 python detect.py --image="../New folder/cats groups/cats groups000.jpg" --weights=models/checkpoints/yolov3/yolov3.tf --num_classes=80 --classes=data/labels/coco.names
+
+- create detection data
+python create_detection_data.py --classes=data/labels/animaltheft.names

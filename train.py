@@ -179,11 +179,11 @@ def main(_argv):
                       run_eagerly=(FLAGS.mode == 'eager_fit'))
 
         callbacks = [
-            ReduceLROnPlateau(verbose=1),
-            EarlyStopping(patience=3, verbose=1),
+            ReduceLROnPlateau(verbose=1,patience=3),
+            EarlyStopping(patience=5, verbose=1),
             ModelCheckpoint(os.path.join(FLAGS.output,'yolov3_train_{epoch}.tf'),
-                             monitor='val_acc',verbose=1, save_weights_only=True,
-                             mode='max',save_best_only=True),
+                             verbose=1, save_weights_only=True,
+                             save_best_only=True),
             TensorBoard(log_dir='logs')
         ]
 
