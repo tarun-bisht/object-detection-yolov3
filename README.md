@@ -10,6 +10,79 @@ A starter yolov3 object detection using tensorflow 2
 - Create datasets by downloading images from google image search or duckduckgo image search or by extracting frames from video
 - Converting images and labels to tfrecords file
 
+## Requirements
+
+### System
+
+There is no specific requirements for inferencing from pretrained models but require GPU for training or finetuning a detection model.
+
+### Python 3
+
+Python 3.6 or higher. Tested with Python 3.7, 3.9 in Windows 10 and Linux.
+
+### Packages
+
+- `tensorflow-gpu>=2.0` or `tensorflow>=2.0`
+- `numpy`
+- `absl-py`
+- `opencv-python`
+
+This implementation is tested with tensorflow cpu and gpu 2.0, 2.2, 2.7 in Windows 10 and Linux
+
+## Installation
+
+### Install Python
+
+There are two ways to install python in windows using [Python 3 installer](https://www.python.org/downloads/) or [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html). Installing python with anaconda or [miniconda](https://docs.conda.io/en/latest/miniconda.html) is recommended. In linux Python 3 is installed by default but we can also install miniconda or conda into linux.
+
+### Creating Virtual Environment
+
+Create a new python virtual environment using conda or venv and activate it. If Anaconda or Miniconda is installed use `conda` else use `venv` to create virtual environments.
+
+- Using conda
+
+```bash
+conda create --name tfod
+conda activate tfod
+conda install pip
+```
+
+- Using venv in linux
+
+```bash
+python3 -m venv path/to/create/env/tfod
+source path/to/create/env/tfod/bin/activate
+```
+
+- Using venv in windows
+
+```bash
+python -m venv path\to\create\env\tfod
+path\to\create\env\tfod\Scripts\activate
+```
+
+### Installing dependencies
+
+#### Installing required python packages
+
+The command below will install the required dependencies from `requirements.txt` file.
+
+```bash
+pip install -r requirements.txt
+```
+
+### Download Pretrained YOLO weights
+
+Download YOLO pretrained coco weights from [Joseph Redmon's website](https://pjreddie.com/yolo/) and convert them using `convert_yolo_weight.py` script (steps are provided in documentation below)
+
+### Additional guides:
+
+If get stuck in installation part follow these additional resources
+
+- [Python Installation](https://www.youtube.com/watch?v=YYXdXT2l-Gg&list)
+- [pip and usage](https://www.youtube.com/watch?v=U2ZN104hIcc)
+- [Anaconda installation and using conda](https://www.youtube.com/watch?v=YJC6ldI3hWk)
+
 ## Documentation
 
 ### Detect Objects in Image
