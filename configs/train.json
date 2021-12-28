@@ -1,5 +1,4 @@
 {
-    "dataset":"data/tfrecords/train.record",
-    "val_dataset":"data/tfrecords/test.record",
-    ""
+  "dataset": "data/dataset/tfrecords/train.record",
+  "val_dataset": "data/dataset/tfrecords/test.record"
 }

@@ -1,25 +1,19 @@
-*.h5
-*.weights
-*.tar
-*.tfrecord
-*.record
-*.csv
-*.tf
-*.ckpt
-/models/checkpoints/*
-/data/outputs/serving/*
-/data/outputs/tflite/*
-/data/outputs/*.jpg
-/data/outputs/*.avi
-/data/outputs/*.mp4
-/data/downloads/*
-/data/images/train/*
-/data/images/test/*
+/data/models/*
+!/data/models/.gitkeep
+/data/csv/*
+!data/csv/.gitkeep
 /data/frames/*
+!data/frames/.gitkeep
+/data/models/*
+!data/models/.gitkeep
+/data/outputs/.mp4
+/data/outputs/.avi
+/data/tfrecords/*
+!data/tfrecords/.gitkeep
+data/weights/*
+!data/weights/.gitkeep
 /logs/
-/Untitled.ipynb
-/output.jpg
-/data/voc2012_raw/
+.vscode
 
 # Created by https://www.gitignore.io/api/python
 # Edit at https://www.gitignore.io/?templates=python

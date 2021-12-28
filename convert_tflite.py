@@ -1,29 +1,17 @@
-import time
 from absl import app, flags, logging
 from absl.flags import FLAGS
-import cv2
-import numpy as np
 import tensorflow as tf
-from yolov3_tf2.models import (
-    YoloV3, YoloV3Tiny
+from src.yolov3.models import YoloV3, YoloV3Tiny
+
+flags.DEFINE_string("weights", "data/models/yolov3/yolov3.tf", "path to weights file")
+flags.DEFINE_boolean("tiny", False, "yolov3 or yolov3-tiny")
+flags.DEFINE_string(
+    "output", "data/outputs/tflite/yolov3.tflite", "path to saved_model"
 )
-from yolov3_tf2.dataset import transform_images
+flags.DEFINE_integer("num_classes", 80, "number of classes in the model")
+flags.DEFINE_integer("size", 416, "image size")
 
-from tensorflow.python.eager import def_function
-from tensorflow.python.framework import tensor_spec
-from tensorflow.python.util import nest
 
-flags.DEFINE_string('weights', 'models/checkpoints/yolov3/yolov3.tf',
-                    'path to weights file')
-flags.DEFINE_boolean('tiny', False, 'yolov3 or yolov3-tiny')
-flags.DEFINE_string('output', 'data/outputs/tflite/yolov3.tflite',
-                    'path to saved_model')
-flags.DEFINE_string('classes', 'data/coco.names', 'path to classes file')
-# flags.DEFINE_string('image', './data/girl.png', 'path to input image')
-flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
-flags.DEFINE_integer('size', 416, 'image size')
-
-# TODO: This is broken DOES NOT WORK !!
 def main(_argv):
     if FLAGS.tiny:
         yolo = YoloV3Tiny(size=FLAGS.size, classes=FLAGS.num_classes)
@@ -31,38 +19,18 @@ def main(_argv):
         yolo = YoloV3(size=FLAGS.size, classes=FLAGS.num_classes)
 
     yolo.load_weights(FLAGS.weights)
-    logging.info('weights loaded')
+    logging.info("weights loaded")
 
     converter = tf.lite.TFLiteConverter.from_keras_model(yolo)
-    converter.target_ops=[tf.lite.OpsSet.TFLITE_BUILTINS,
-                            tf.lite.OpsSet.SELECT_TF_OPS]
-    converter.allow_custom_ops=True
+    converter.target_ops = [
+        tf.lite.OpsSet.TFLITE_BUILTINS,
+        tf.lite.OpsSet.SELECT_TF_OPS,
+    ]
+    converter.allow_custom_ops = True
     tflite_model = converter.convert()
-    open(FLAGS.output, 'wb').write(tflite_model)
+    open(FLAGS.output, "wb").write(tflite_model)
     logging.info("model saved to: {}".format(FLAGS.output))
 
-    # interpreter = tf.lite.Interpreter(model_path=FLAGS.output)
-    # interpreter.allocate_tensors()
-    # logging.info('tflite model loaded')
 
-    # input_details = interpreter.get_input_details()
-    # output_details = interpreter.get_output_details()
-
-    # class_names = [c.strip() for c in open(FLAGS.classes).readlines()]
-    # logging.info('classes loaded')
-
-    # img = tf.image.decode_image(open(FLAGS.image, 'rb').read(), channels=3)
-    # img = tf.expand_dims(img, 0)
-    # img = transform_images(img, 416)
-
-    # t1 = time.time()
-    # outputs = interpreter.set_tensor(input_details[0]['index'], img)
-
-    # interpreter.invoke()
-
-    # output_data = interpreter.get_tensor(output_details[0]['index'])
-
-    # print(output_data)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(main)

@@ -9,10 +9,10 @@ from src.yolov3.utils import draw_outputs
 
 
 flags.DEFINE_string("classes", "data/labels/coco.names", "path to classes file")
-flags.DEFINE_string("weights", "models/yolov3/yolov3.tf", "path to weights file")
+flags.DEFINE_string("weights", "data/models/yolov3/yolov3.tf", "path to weights file")
 flags.DEFINE_boolean("tiny", False, "yolov3 or yolov3-tiny")
 flags.DEFINE_integer("size", 416, "resize images to")
-flags.DEFINE_string("video", None, "path to video file")
+flags.DEFINE_integer("camera", 0, "webcam number")
 flags.DEFINE_string("output", None, "path to output video")
 flags.DEFINE_string(
     "output_format", "XVID", "codec used in VideoWriter when saving video to file"
@@ -38,10 +38,11 @@ def main(_argv):
 
     times = []
 
-    vid = cv2.VideoCapture(FLAGS.video)
+    vid = cv2.VideoCapture(int(FLAGS.camera))
     out = None
 
     if FLAGS.output:
+        # by default VideoCapture returns float instead of int
         width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = int(vid.get(cv2.CAP_PROP_FPS))
@@ -50,6 +51,7 @@ def main(_argv):
 
     while True:
         _, img = vid.read()
+
         if img is None:
             logging.warning("Empty Frame")
             time.sleep(0.1)
@@ -80,7 +82,7 @@ def main(_argv):
         cv2.imshow("output", img)
         if cv2.waitKey(1) == ord("q"):
             break
-    vid.release()
+
     cv2.destroyAllWindows()
 
 
